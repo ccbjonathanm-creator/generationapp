@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1a14" />
+  <meta name="description" content="Découvre Off-Grid : mesure ton autonomie en énergie, eau et nourriture, et suis un plan concret pour t'affranchir." />
+  <title>Off-Grid — la vidéo</title>
+  <link rel="icon" href="assets/offgrid.png" />
+  <link rel="stylesheet" href="../player.css?v=1" />
+  <style>
+    /* ---- identité verte d'Off-Grid (surcharge la palette du moteur) ---- */
+    :root{
+      --bg:#0f1a14; --bg-soft:#16241b;
+      --text:#eaf3ec; --muted:#a9c1b0;
+      --accent:#6fd08a; --accent-2:#f4b942;
+      --green:#4caf6d; --red:#e2683c; --orange:#f4b942;
+      --glow:0 0 24px rgba(111,208,138,.45);
+      --grad:linear-gradient(115deg,#6fd08a,#8bc34a 55%,#f4b942);
+    }
+    body{
+      background:
+        radial-gradient(85% 55% at 10% -8%, rgba(111,208,138,.20), transparent 60%),
+        radial-gradient(75% 50% at 108% 110%, rgba(244,185,66,.14), transparent 55%),
+        var(--bg);
+    }
+    /* ---- écrans propres à OFF-GRID ---- */
+    .score{display:flex; align-items:center; gap:14px; padding:16px}
+    .ring{width:74px; height:74px; border-radius:50%; flex:none; display:grid; place-items:center;
+      background:conic-gradient(var(--accent) 0 68%, rgba(255,255,255,.10) 68% 100%);}
+    .ring b{width:56px; height:56px; border-radius:50%; background:var(--bg-soft); display:grid; place-items:center;
+      font-size:19px; font-weight:800; color:var(--accent)}
+    .score .st{font-size:13px; font-weight:800} .score .ss{font-size:10px; color:var(--muted); margin-top:2px}
+    .cats{margin-top:10px}
+    .catrow{display:flex; align-items:center; gap:9px; margin-top:9px}
+    .catrow .e{font-size:15px; width:20px; text-align:center}
+    .catrow .nm{font-size:10.5px; width:78px}
+    .catbar{flex:1; height:8px; border-radius:5px; background:rgba(255,255,255,.08); overflow:hidden}
+    .catbar i{display:block; height:100%; width:0; border-radius:5px; background:linear-gradient(90deg,var(--green),var(--accent)); transition:width 1s ease}
+    .catrow .pc{font-size:10px; font-weight:800; color:var(--accent); width:26px; text-align:right}
+    .lvl{margin-top:10px}
+    .lvl .top{display:flex; justify-content:space-between; font-size:10.5px; margin-bottom:5px}
+    .lvl .top b{font-weight:700} .lvl .top span{color:var(--muted)}
+    .lvlbar{height:8px; border-radius:5px; background:rgba(255,255,255,.08); overflow:hidden}
+    .lvlbar i{display:block; height:100%; width:0; border-radius:5px; background:linear-gradient(90deg,var(--green),var(--leaf,#8bc34a)); transition:width 1s ease}
+    .mod{margin-top:10px; padding:11px 12px}
+    .mod .mt{font-size:11px; font-weight:800; margin-bottom:8px}
+    .chk{display:flex; align-items:center; gap:8px; font-size:10px; margin-top:6px; color:var(--muted)}
+    .chk .b{width:15px; height:15px; border-radius:5px; flex:none; display:grid; place-items:center; font-size:10px;
+      background:var(--green); color:#0b1a10; font-weight:900}
+    .calc{padding:12px 13px; margin-top:9px}
+    .calc .ct{font-size:11px; font-weight:800; display:flex; align-items:center; gap:7px}
+    .calc .cr{display:flex; justify-content:space-between; font-size:10px; margin-top:7px; color:var(--muted)}
+    .calc .cr b{color:var(--text); font-weight:800}
+    .geo{padding:13px; margin-top:9px}
+    .geo .g1{font-size:12px; font-weight:800; display:flex; align-items:center; gap:7px}
+    .geo .gr{display:flex; align-items:center; gap:8px; font-size:11px; margin-top:10px}
+    .geo .gr .e{font-size:16px} .geo .gr b{font-weight:800}
+    .src{display:inline-block; margin-top:11px; font-size:8px; font-weight:800; letter-spacing:.05em; color:var(--accent);
+      background:color-mix(in srgb,var(--accent) 18%,transparent); padding:2px 8px; border-radius:8px}
+    .roi{padding:13px; margin-top:9px}
+    .roi .rr{display:flex; justify-content:space-between; align-items:baseline; font-size:11px; margin-top:8px}
+    .roi .rr:first-child{margin-top:0}
+    .roi .rr b{font-size:16px; font-weight:800; color:var(--accent)}
+    .roi .rr .sun{color:var(--accent-2)}
+    .pdfbtn{margin-top:12px; text-align:center; font-size:11px; font-weight:800; padding:10px; border-radius:12px;
+      background:linear-gradient(135deg,var(--green),var(--accent)); color:#0b1a10}
+  </style>
+</head>
+<body>
+  <main id="video-root">
+    <!-- S0 Intro -->
+    <div class="scr" data-scene="0">
+      <div class="center">
+        <div class="bigicon"><img src="assets/offgrid-512.png" alt="Off-Grid" /></div>
+        <h1 class="brand">Off-Grid</h1>
+        <p class="claim">Deviens autonome, pas à pas.</p>
+      </div>
+    </div>
+
+    <!-- S1 Bilan / score -->
+    <div class="scr" data-scene="1">
+      <div class="p-title">Bilan d'autonomie</div>
+      <div class="score glass">
+        <div class="ring"><b>68</b></div>
+        <div><div class="st">Autonome à 68 %</div><div class="ss">niveau « bien engagé »</div></div>
+      </div>
+      <div class="cats">
+        <div class="catrow"><span class="e">⚡</span><span class="nm">Énergie</span><span class="catbar" data-w="83"><i></i></span><span class="pc">83</span></div>
+        <div class="catrow"><span class="e">💧</span><span class="nm">Eau</span><span class="catbar" data-w="78"><i></i></span><span class="pc">78</span></div>
+        <div class="catrow"><span class="e">🥬</span><span class="nm">Alimentation</span><span class="catbar" data-w="60"><i></i></span><span class="pc">60</span></div>
+        <div class="catrow"><span class="e">♻️</span><span class="nm">Déchets</span><span class="catbar" data-w="68"><i></i></span><span class="pc">68</span></div>
+      </div>
+    </div>
+
+    <!-- S2 Parcours -->
+    <div class="scr" data-scene="2">
+      <div class="p-title">Parcours <span class="p-sub">3 niveaux, 17 modules</span></div>
+      <div class="glass" style="padding:13px">
+        <div class="lvl"><div class="top"><b>Niveau 1 · Découverte</b><span>100 %</span></div><div class="lvlbar" data-w="100"><i></i></div></div>
+        <div class="lvl"><div class="top"><b>Niveau 2 · Transition</b><span>60 %</span></div><div class="lvlbar" data-w="60"><i></i></div></div>
+        <div class="lvl"><div class="top"><b>Niveau 3 · Autonomie</b><span>20 %</span></div><div class="lvlbar" data-w="20"><i></i></div></div>
+      </div>
+      <div class="mod glass">
+        <div class="mt">☀️ Installer un kit solaire</div>
+        <div class="chk"><span class="b">✓</span> Calculer mes besoins en énergie</div>
+        <div class="chk"><span class="b">✓</span> Choisir panneaux et batteries</div>
+        <div class="chk"><span class="b">✓</span> Monter et brancher le régulateur</div>
+      </div>
+    </div>
+
+    <!-- S3 Calculateurs -->
+    <div class="scr" data-scene="3">
+      <div class="p-title">Calculateurs <span class="p-sub">dimensionnement exact</span></div>
+      <div class="calc glass">
+        <div class="ct">☀️ Solaire + batteries</div>
+        <div class="cr"><span>Panneaux</span><b>3 × 400 Wc</b></div>
+        <div class="cr"><span>Batteries</span><b>2 × 200 Ah</b></div>
+        <div class="cr"><span>Production estimée</span><b>4,7 kWh/j</b></div>
+      </div>
+      <div class="calc glass">
+        <div class="ct">💧 Eau de pluie</div>
+        <div class="cr"><span>Toiture 80 m²</span><b>62 000 L/an</b></div>
+        <div class="cr"><span>Cuve conseillée</span><b>5 000 L</b></div>
+      </div>
+      <div class="calc glass">
+        <div class="ct">🥬 Potager</div>
+        <div class="cr"><span>Autonomie légumes 2 pers.</span><b>≈ 150 m²</b></div>
+      </div>
+    </div>
+
+    <!-- S4 Géolocalisation réelle -->
+    <div class="scr" data-scene="4">
+      <div class="p-title">Ta commune <span class="p-sub">données réelles</span></div>
+      <div class="geo glass">
+        <div class="g1">📍 Le Creusot (71200)</div>
+        <div class="gr"><span class="e">☀️</span><div>Ensoleillement <b>3,9 kWh/m²/j</b></div></div>
+        <div class="gr"><span class="e">🌧️</span><div>Pluie <b>898 mm/an</b></div></div>
+        <span class="src">SOURCE OPEN-METEO</span>
+      </div>
+      <div class="ins glass" style="display:flex; gap:9px; padding:10px 12px; margin-top:10px; align-items:flex-start">
+        <div style="font-size:15px">🎯</div>
+        <div style="font-size:10px; line-height:1.4">Ton dimensionnement solaire et pluie est calculé sur le climat <b>réel</b> de chez toi, pas une moyenne.</div>
+      </div>
+    </div>
+
+    <!-- S5 Plan / rentabilité -->
+    <div class="scr" data-scene="5">
+      <div class="p-title">Ton plan <span class="p-sub">rentabilité + PDF</span></div>
+      <div class="roi glass">
+        <div class="rr"><span>Économie estimée</span><b>525 €/an</b></div>
+        <div class="rr"><span>Retour sur investissement</span><b class="sun">9,5 ans</b></div>
+        <div class="rr"><span>Gain sur 20 ans</span><b>+10 500 €</b></div>
+      </div>
+      <div class="pdfbtn">📄 Enregistrer mon plan d'autonomie en PDF</div>
+    </div>
+
+    <!-- S6 Outro / CTA -->
+    <div class="scr" data-scene="6">
+      <div class="center">
+        <div class="bigicon"><img src="assets/offgrid-512.png" alt="Off-Grid" /></div>
+        <h1 class="brand"><span>Off-Grid</span></h1>
+        <p class="claim">Reprends ton autonomie, chez toi.</p>
+        <a class="cta" href="https://offgrid.generationapp.fr">Ouvrir Off-Grid →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="../player.js"></script>
+</body>
+</html>
