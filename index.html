@@ -82,10 +82,12 @@
     .card:nth-child(3){animation-delay:.17s}.card:nth-child(4){animation-delay:.23s}
     .card:nth-child(5){animation-delay:.29s}.card:nth-child(6){animation-delay:.35s}
 
-    .chip{width:56px; height:56px; border-radius:17px; display:grid; place-items:center; font-size:30px;
-      margin-bottom:6px; background:color-mix(in srgb,var(--a) 16%,transparent);
-      border:1px solid color-mix(in srgb,var(--a) 30%,transparent);
-      box-shadow:0 8px 22px -12px color-mix(in srgb,var(--a) 90%,transparent)}
+    .chip{width:64px; height:64px; border-radius:17px; overflow:hidden; margin-bottom:8px; position:relative;
+      border:1px solid color-mix(in srgb,var(--a) 26%,transparent);
+      box-shadow:0 12px 28px -12px color-mix(in srgb,var(--a) 85%,transparent), 0 2px 8px rgba(0,0,0,.45)}
+    .chip img{width:100%; height:100%; display:block; object-fit:cover}
+    .card:hover .chip{transform:scale(1.05)}
+    .chip{transition:transform .2s cubic-bezier(.2,.7,.2,1)}
     .card h2{margin:0; font-size:21px; font-weight:700; letter-spacing:-.01em}
     .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.55; flex:1}
     .go{margin-top:14px; align-self:flex-start; display:inline-flex; align-items:center; gap:7px;
@@ -147,46 +149,46 @@
     </header>
 
     <div class="grid">
-      <a class="card" style="--a:#5eead4" href="https://coffre.generationapp.fr">
-        <span class="chip">💶</span>
+      <a class="card" style="--a:#38bdf8" href="https://coffre.generationapp.fr">
+        <span class="chip"><img src="icons/coffre.png" alt="Icône Coffre" width="64" height="64" /></span>
         <h2>Coffre</h2>
-        <p>Ton budget sous contrôle : dépenses, reste à vivre, alertes. 100% privé, chiffré, hors-ligne.</p>
+        <p>Sais enfin où part ton argent. Reste à vivre au jour le jour, alertes de dépassement, abonnements à résilier détectés pour toi. Tout est chiffré sur ton téléphone, rien ne part en ligne.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" style="--a:#fbbf24" href="https://valise.generationapp.fr">
-        <span class="chip">🧳</span>
+      <a class="card" style="--a:#10b981" href="https://valise.generationapp.fr">
+        <span class="chip"><img src="icons/valise.png" alt="Icône Valise" width="64" height="64" /></span>
         <h2>Valise</h2>
-        <p>Ta liste de voyage à cocher, générée selon ta destination, la météo et tes dates.</p>
+        <p>Ne fais plus jamais ta valise dans le stress. Dis où et quand tu pars, elle bâtit ta liste à cocher selon la météo prévue, le nombre de voyageurs et le type de séjour.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" style="--a:#38bdf8" href="https://voyage.generationapp.fr">
-        <span class="chip">🗺️</span>
+      <a class="card" style="--a:#818cf8" href="https://voyage.generationapp.fr">
+        <span class="chip"><img src="icons/voyage.png" alt="Icône Voyage" width="64" height="64" /></span>
         <h2>Voyage</h2>
-        <p>Ton itinéraire sur mesure, généré et vérifié : lieux réels, météo, et liens vols et hôtels prêts à réserver.</p>
+        <p>Ton programme de voyage prêt en un instant. Des lieux réels vérifiés jour par jour, la météo sur place, et les liens vols et hôtels déjà pré-remplis pour réserver.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" style="--a:#fb7185" href="https://portail.generationapp.fr">
-        <span class="chip">🐰</span>
+      <a class="card" style="--a:#22d3ee" href="https://portail.generationapp.fr">
+        <span class="chip"><img src="icons/portail.png" alt="Icône Portail" width="64" height="64" /></span>
         <h2>Portail</h2>
-        <p>Un lapin géant en réalité augmentée qui débarque dans ta pièce, via la caméra.</p>
+        <p>Fais surgir un lapin géant dans ton salon. Vraie réalité augmentée par la caméra : il rôde, te fixe et te charge dessus. L'effet qui bluffe tous ceux à qui tu le montres.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" style="--a:#34d399" href="https://offgrid.generationapp.fr">
-        <span class="chip">🌿</span>
+      <a class="card" style="--a:#f59e0b" href="https://offgrid.generationapp.fr">
+        <span class="chip"><img src="icons/offgrid.png" alt="Icône Off-Grid" width="64" height="64" /></span>
         <h2>Off-Grid</h2>
-        <p>Évalue ton autonomie (énergie, eau, alimentation) et avance pas à pas pour sortir du système.</p>
+        <p>Et si tu devenais autonome ? Mesure ton indépendance en énergie, eau et nourriture, puis suis un plan concret, étape par étape, pour t'affranchir du système.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
       <div class="card soon" style="--a:#a78bfa">
         <span class="badge">bientôt</span>
-        <span class="chip">🔺</span>
+        <span class="chip"><img src="icons/prisme.png" alt="Icône Prisme" width="64" height="64" /></span>
         <h2>Prisme</h2>
-        <p>Scanne un document : l'IA le lit, le résume, l'explique ou en extrait les infos clés.</p>
+        <p>Photographie n'importe quel document : l'IA le lit, te le résume, l'explique en clair et en extrait dates, montants et échéances. Bientôt entre tes mains.</p>
         <span class="go">Bientôt</span>
       </div>
     </div>
