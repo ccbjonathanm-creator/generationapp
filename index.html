@@ -4,125 +4,204 @@
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#050914" />
-  <meta name="description" content="Generation App : des applications mobiles simples, privées et hors-ligne. Budget, voyage, scanner IA et plus." />
+  <meta name="theme-color" content="#05060f" />
+  <meta name="description" content="Generation App : des applications mobiles simples, privées et hors-ligne. Budget, voyage, itinéraires, autonomie, scanner IA et plus." />
   <title>Generation App — mes applications</title>
   <link rel="icon" href="favicon.svg" />
   <style>
     :root{
-      --bg:#050914; --txt:#e8ecff; --muted:#8a93b8;
-      --card:rgba(20,28,48,.55); --stroke:rgba(148,163,255,.16); --stroke2:rgba(148,163,255,.34);
-      --grad:linear-gradient(120deg,#5eead4,#818cf8 55%,#f472b6);
+      --bg:#05060f; --txt:#eef1ff; --muted:#9aa3c8;
+      --card:rgba(18,24,44,.5); --stroke:rgba(150,165,255,.14);
+      --grad:linear-gradient(115deg,#5eead4,#818cf8 52%,#f472b6);
     }
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0}
     body{
-      background:var(--bg); color:var(--txt); min-height:100vh;
+      background:var(--bg); color:var(--txt); min-height:100dvh;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
-      -webkit-font-smoothing:antialiased; overflow-x:hidden;
+      -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative;
     }
-    .aurora{
-      position:fixed; inset:-30% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
-      background:
-        radial-gradient(40% 40% at 20% 20%,rgba(94,234,212,.20),transparent 70%),
-        radial-gradient(45% 45% at 80% 10%,rgba(129,140,248,.22),transparent 70%),
-        radial-gradient(40% 40% at 60% 60%,rgba(244,114,182,.16),transparent 70%);
-      filter:blur(30px);
-    }
-    .wrap{position:relative; z-index:1; max-width:760px; margin:0 auto; padding:56px 20px 60px}
-    header{text-align:center; margin-bottom:40px}
-    .logo{width:64px;height:64px;margin:0 auto 18px;display:block}
-    h1{margin:0 0 8px; font-size:30px; letter-spacing:.3px}
-    h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .tagline{margin:0; color:var(--muted); font-size:15px; line-height:1.5}
-    .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-    @media (max-width:560px){ .grid{grid-template-columns:1fr} }
+
+    /* ---------- fond nouvelle génération : mesh animé + grain ---------- */
+    .bg{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none}
+    .blob{position:absolute; border-radius:50%; filter:blur(70px); opacity:.55; will-change:transform}
+    .b1{width:52vmax;height:52vmax; top:-18vmax; left:-12vmax;
+      background:radial-gradient(circle,#5eead4,transparent 62%); animation:drift1 22s ease-in-out infinite}
+    .b2{width:48vmax;height:48vmax; top:-10vmax; right:-14vmax;
+      background:radial-gradient(circle,#818cf8,transparent 62%); animation:drift2 26s ease-in-out infinite}
+    .b3{width:46vmax;height:46vmax; bottom:-20vmax; left:22vmax;
+      background:radial-gradient(circle,#f472b6,transparent 62%); animation:drift3 30s ease-in-out infinite}
+    @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,6vmax) scale(1.12)}}
+    @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7vmax,9vmax) scale(1.08)}}
+    @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vmax,-8vmax) scale(1.14)}}
+    .grain{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+    .wrap{position:relative; z-index:1; max-width:820px; margin:0 auto; padding:64px 20px 64px}
+
+    /* ---------- header ---------- */
+    header{text-align:center; margin-bottom:46px; animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+    .mark{position:relative; width:82px; height:82px; margin:0 auto 22px; display:grid; place-items:center}
+    .mark::before{content:""; position:absolute; inset:-9px; border-radius:26px; z-index:-1;
+      background:conic-gradient(from 0deg,#5eead4,#818cf8,#f472b6,#5eead4);
+      filter:blur(11px); opacity:.6; animation:spin 9s linear infinite}
+    .mark svg{width:82px; height:82px; display:block}
+    .eyebrow{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--muted); padding:6px 14px; border:1px solid var(--stroke); border-radius:999px;
+      background:var(--card); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); margin-bottom:18px}
+    h1{margin:0 0 12px; font-size:clamp(32px,7vw,50px); font-weight:800; letter-spacing:-.02em; line-height:1.02}
+    h1 span{background:var(--grad); background-size:200% 100%; -webkit-background-clip:text; background-clip:text;
+      color:transparent; animation:shift 6s ease infinite}
+    .tagline{margin:0 auto; max-width:520px; color:var(--muted); font-size:16px; line-height:1.55}
+
+    /* ---------- grille de cartes ---------- */
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    @media (max-width:600px){ .grid{grid-template-columns:1fr; gap:14px} }
     .card{
-      display:flex; flex-direction:column; gap:6px; padding:22px;
-      background:var(--card); border:1px solid var(--stroke); border-radius:22px;
-      backdrop-filter:blur(12px); text-decoration:none; color:inherit;
-      transition:transform .14s, border-color .2s, box-shadow .2s; position:relative;
+      --a:#818cf8;
+      position:relative; display:flex; flex-direction:column; gap:8px; padding:24px;
+      background:var(--card); border:1px solid var(--stroke); border-radius:24px;
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      text-decoration:none; color:inherit; overflow:hidden;
+      transition:transform .18s cubic-bezier(.2,.7,.2,1), border-color .25s, box-shadow .3s;
+      animation:rise .7s cubic-bezier(.2,.7,.2,1) both;
     }
-    .card:hover{transform:translateY(-3px); border-color:var(--stroke2); box-shadow:0 18px 40px -22px rgba(129,140,248,.8)}
-    .card .emoji{font-size:34px; margin-bottom:6px}
-    .card h2{margin:0; font-size:20px}
-    .card p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.5; flex:1}
-    .go{margin-top:12px; display:inline-flex; align-items:center; gap:7px; font-weight:600; font-size:14px;
-      padding:11px 16px; border-radius:14px; background:var(--grad); color:#071018; align-self:flex-start}
-    .card.soon{opacity:.72}
-    .badge{position:absolute; top:16px; right:16px; font-size:11px; font-weight:700;
-      padding:4px 10px; border-radius:10px; background:rgba(244,114,182,.16); color:#f472b6}
-    .soon .go{background:rgba(148,163,255,.14); color:var(--muted); cursor:default}
-    .hint{margin:34px auto 0; max-width:560px; text-align:center; color:var(--muted); font-size:13px; line-height:1.6;
-      background:var(--card); border:1px solid var(--stroke); border-radius:16px; padding:16px 18px; backdrop-filter:blur(12px)}
-    .hint b{color:var(--txt)}
-    footer{margin-top:40px; text-align:center; color:var(--muted); font-size:12px; opacity:.7}
+    .card::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none;
+      background:linear-gradient(140deg,color-mix(in srgb,var(--a) 70%,transparent),transparent 55%);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude; opacity:.5; transition:opacity .3s}
+    .card::after{content:""; position:absolute; width:170px; height:170px; border-radius:50%;
+      top:-70px; right:-50px; background:radial-gradient(circle,var(--a),transparent 65%);
+      opacity:.16; filter:blur(6px); transition:opacity .3s}
+    .card:hover,.card:focus-visible{transform:translateY(-6px);
+      border-color:color-mix(in srgb,var(--a) 45%,var(--stroke));
+      box-shadow:0 24px 50px -26px color-mix(in srgb,var(--a) 90%,transparent)}
+    .card:hover::before,.card:focus-visible::before{opacity:1}
+    .card:hover::after{opacity:.28}
+    .card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.11s}
+    .card:nth-child(3){animation-delay:.17s}.card:nth-child(4){animation-delay:.23s}
+    .card:nth-child(5){animation-delay:.29s}.card:nth-child(6){animation-delay:.35s}
+
+    .chip{width:56px; height:56px; border-radius:17px; display:grid; place-items:center; font-size:30px;
+      margin-bottom:6px; background:color-mix(in srgb,var(--a) 16%,transparent);
+      border:1px solid color-mix(in srgb,var(--a) 30%,transparent);
+      box-shadow:0 8px 22px -12px color-mix(in srgb,var(--a) 90%,transparent)}
+    .card h2{margin:0; font-size:21px; font-weight:700; letter-spacing:-.01em}
+    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.55; flex:1}
+    .go{margin-top:14px; align-self:flex-start; display:inline-flex; align-items:center; gap:7px;
+      font-weight:700; font-size:14px; padding:11px 17px; border-radius:14px;
+      background:color-mix(in srgb,var(--a) 20%,transparent);
+      border:1px solid color-mix(in srgb,var(--a) 34%,transparent); color:var(--txt);
+      transition:gap .2s, background .25s}
+    .card:hover .go{gap:11px; background:color-mix(in srgb,var(--a) 30%,transparent)}
+
+    .card.soon{opacity:.66}
+    .card.soon:hover{transform:none; box-shadow:none}
+    .badge{position:absolute; top:18px; right:18px; font-size:10.5px; font-weight:800; letter-spacing:.06em;
+      text-transform:uppercase; padding:5px 11px; border-radius:999px;
+      background:color-mix(in srgb,var(--a) 18%,transparent); color:var(--a);
+      border:1px solid color-mix(in srgb,var(--a) 34%,transparent)}
+    .soon .go{cursor:default}
+
+    /* ---------- guide d'installation ---------- */
+    .guide{margin:38px auto 0; background:var(--card); border:1px solid var(--stroke); border-radius:22px;
+      padding:24px 22px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px)}
+    .guide h3{margin:0 0 4px; font-size:17px; font-weight:800}
+    .guide .sub{margin:0 0 18px; color:var(--muted); font-size:13.5px}
+    .steps{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+    .steps li{display:flex; align-items:flex-start; gap:13px; font-size:14.5px; line-height:1.5}
+    .num{flex:none; width:28px; height:28px; border-radius:9px; display:grid; place-items:center;
+      font-size:14px; font-weight:800; color:#071018; background:var(--grad)}
+    .steps b{color:var(--txt)}
+    .note{margin:16px 0 0; font-size:13px; color:var(--muted); line-height:1.55}
+    .note b{color:#5eead4}
+
+    footer{margin-top:44px; text-align:center; color:var(--muted); font-size:12px; opacity:.7}
+
+    @keyframes rise{from{opacity:0; transform:translateY(16px)}to{opacity:1; transform:translateY(0)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes shift{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none !important; transition:none !important}
+    }
   </style>
 </head>
 <body>
-  <div class="aurora"></div>
+  <div class="bg"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="grain"></div>
+
   <div class="wrap">
     <header>
-      <svg class="logo" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#5eead4"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#f472b6"/>
-        </linearGradient></defs>
-        <rect x="4" y="4" width="24" height="24" rx="7" fill="none" stroke="url(#g)" stroke-width="2.4"/>
-        <path d="M11 16 h10 M16 11 v10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
-      </svg>
-      <h1>Generation <span>App</span></h1>
-      <p class="tagline">Des applications simples, privées et qui marchent hors-ligne.<br>Rien à installer depuis un store : ouvre, ajoute à ton écran d'accueil, c'est prêt.</p>
+      <div class="mark">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5eead4"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#f472b6"/>
+          </linearGradient></defs>
+          <rect x="4" y="4" width="24" height="24" rx="8" fill="rgba(10,14,30,.7)" stroke="url(#g)" stroke-width="2.4"/>
+          <path d="M11 16 h10 M16 11 v10" stroke="url(#g)" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="eyebrow">Generation App</span>
+      <h1>Des applis <span>nouvelle génération</span></h1>
+      <p class="tagline">Simples, privées et qui marchent hors-ligne. Rien à installer depuis un store : tu ouvres, tu ajoutes à ton écran d'accueil, c'est prêt.</p>
     </header>
 
     <div class="grid">
-      <a class="card" href="https://coffre.generationapp.fr">
-        <span class="emoji">💶</span>
+      <a class="card" style="--a:#5eead4" href="https://coffre.generationapp.fr">
+        <span class="chip">💶</span>
         <h2>Coffre</h2>
         <p>Ton budget sous contrôle : dépenses, reste à vivre, alertes. 100% privé, chiffré, hors-ligne.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" href="https://valise.generationapp.fr">
-        <span class="emoji">🧳</span>
+      <a class="card" style="--a:#fbbf24" href="https://valise.generationapp.fr">
+        <span class="chip">🧳</span>
         <h2>Valise</h2>
         <p>Ta liste de voyage à cocher, générée selon ta destination, la météo et tes dates.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" href="https://voyage.generationapp.fr">
-        <span class="emoji">🗺️</span>
+      <a class="card" style="--a:#38bdf8" href="https://voyage.generationapp.fr">
+        <span class="chip">🗺️</span>
         <h2>Voyage</h2>
         <p>Ton itinéraire sur mesure, généré et vérifié : lieux réels, météo, et liens vols et hôtels prêts à réserver.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" href="https://portail.generationapp.fr">
-        <span class="emoji">🐰</span>
+      <a class="card" style="--a:#fb7185" href="https://portail.generationapp.fr">
+        <span class="chip">🐰</span>
         <h2>Portail</h2>
         <p>Un lapin géant en réalité augmentée qui débarque dans ta pièce, via la caméra.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <a class="card" href="https://offgrid.generationapp.fr">
-        <span class="emoji">🌿</span>
+      <a class="card" style="--a:#34d399" href="https://offgrid.generationapp.fr">
+        <span class="chip">🌿</span>
         <h2>Off-Grid</h2>
         <p>Évalue ton autonomie (énergie, eau, alimentation) et avance pas à pas pour sortir du système.</p>
         <span class="go">Ouvrir →</span>
       </a>
 
-      <div class="card soon">
+      <div class="card soon" style="--a:#a78bfa">
         <span class="badge">bientôt</span>
-        <span class="emoji">🔺</span>
+        <span class="chip">🔺</span>
         <h2>Prisme</h2>
         <p>Scanne un document : l'IA le lit, le résume, l'explique ou en extrait les infos clés.</p>
         <span class="go">Bientôt</span>
       </div>
     </div>
 
-    <p class="hint">
-      <b>Comment installer une appli ?</b><br>
-      Ouvre-la, puis dans ton navigateur choisis <b>« Ajouter à l'écran d'accueil »</b>. Elle apparaît comme une vraie appli, utilisable même sans connexion.
-    </p>
+    <div class="guide">
+      <h3>Installer une appli sur ton téléphone</h3>
+      <p class="sub">Une appli s'ajoute comme une vraie application, sans passer par un store.</p>
+      <ol class="steps">
+        <li><span class="num">1</span><span>Ouvre l'appli en cliquant sur <b>« Ouvrir »</b> ci-dessus.</span></li>
+        <li><span class="num">2</span><span>Dans ton navigateur, ouvre le menu <b>⋮</b> (Android) ou <b>Partager</b> (iPhone).</span></li>
+        <li><span class="num">3</span><span>Choisis <b>« Ajouter à l'écran d'accueil »</b>.</span></li>
+        <li><span class="num">4</span><span>Appuie sur <b>« Installer »</b> pour confirmer.</span></li>
+      </ol>
+      <p class="note">L'icône apparaît sur ton écran d'accueil comme une vraie appli, et <b>elle marche même sans connexion</b>.</p>
+    </div>
 
     <footer>generationapp.fr — © 2026</footer>
   </div>
