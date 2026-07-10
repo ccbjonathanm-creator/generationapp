@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#05060f" />
+  <meta name="description" content="Découvre Coffre : l'appli qui te montre où part ton argent. Chiffrée, 100% sur ton téléphone, hors-ligne." />
+  <title>Coffre — la vidéo</title>
+  <link rel="icon" href="assets/coffre.png" />
+  <link rel="stylesheet" href="../player.css?v=1" />
+  <style>
+    /* ---- écrans propres à COFFRE ---- */
+    .lockwrap{height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center}
+    .lock-ico{width:52px; height:52px; border-radius:15px; display:grid; place-items:center; margin-bottom:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--glow)}
+    .lock-ico svg{width:30px; height:30px}
+    .lock-h{font-size:20px; font-weight:800; margin:0}
+    .lock-s{font-size:10px; color:var(--muted); margin:4px 0 18px}
+    .dots{display:flex; gap:12px; margin-bottom:20px}
+    .dots i{width:11px; height:11px; border-radius:50%; border:2px solid var(--muted); transition:.2s}
+    .dots i.on{background:var(--accent); border-color:var(--accent); box-shadow:var(--glow)}
+    .keys{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; width:74%}
+    .keys b{aspect-ratio:1; border-radius:50%; display:grid; place-items:center; font-size:15px; font-weight:600;
+      background:var(--card); border:1px solid var(--line)}
+    .keys b.k.press{background:var(--card-2); box-shadow:var(--glow); transform:scale(.94)}
+    .hero{border-radius:18px; padding:14px; color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:0 12px 30px rgba(139,123,255,.4)}
+    .hero .l{font-size:9px; opacity:.9; margin:0}
+    .hero .amt{font-size:26px; font-weight:800; margin:3px 0 0; letter-spacing:-1px}
+    .hero .row{display:flex; gap:10px; margin-top:10px}
+    .hero .row div{flex:1}
+    .hero .row .k{font-size:8px; opacity:.9; margin:0}
+    .hero .row .v{font-size:12px; font-weight:800; margin:2px 0 0}
+    .safe{display:flex; align-items:center; gap:10px; padding:12px; margin-top:10px}
+    .safe .big{font-size:20px; font-weight:800; color:var(--green)}
+    .safe .lbl{font-size:9px; color:var(--muted)}
+    .ins{display:flex; gap:9px; padding:10px 12px; margin-top:10px; align-items:flex-start}
+    .ins .e{font-size:15px} .ins .t{font-size:10px; line-height:1.4; color:var(--text)}
+    .row-tx{display:flex; align-items:center; gap:9px; padding:9px 10px; margin-top:8px}
+    .row-tx .ico{width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-size:15px; background:var(--card-2)}
+    .row-tx .m{flex:1; min-width:0}
+    .row-tx .c{font-size:11px; font-weight:700}
+    .row-tx .n{font-size:8.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .row-tx .a{font-size:11px; font-weight:800}
+    .a.exp{color:var(--red)} .a.inc{color:var(--green)}
+    .tag-auto{font-size:7.5px; font-weight:800; color:var(--accent); background:color-mix(in srgb,var(--accent) 20%,transparent); padding:1px 6px; border-radius:8px}
+    .bud{margin-top:12px}
+    .bud .top{display:flex; justify-content:space-between; font-size:10px; margin-bottom:5px}
+    .bud .top b{font-weight:700} .bud .top span{color:var(--muted)}
+    .bar{height:8px; border-radius:5px; background:rgba(255,255,255,.08); overflow:hidden}
+    .bar i{display:block; height:100%; border-radius:5px; width:0; transition:width 1s ease}
+    .bar.ok i{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+    .bar.warn i{background:var(--orange)}
+    .bar.over i{background:var(--red)}
+    .abo{display:flex; align-items:center; justify-content:space-between; padding:11px 12px; margin-top:9px}
+    .abo .nm{font-size:11px; font-weight:800; display:flex; align-items:center; gap:6px}
+    .abo .co{font-size:13px; font-weight:800; color:var(--red)}
+    .abo .badge{font-size:7.5px; font-weight:800; padding:1px 6px; border-radius:8px;
+      background:color-mix(in srgb,var(--red) 22%,transparent); color:var(--red)}
+    .letter{margin-top:10px; padding:11px; font-size:8.5px; line-height:1.5; color:var(--muted)}
+    .letter b{color:var(--text)}
+  </style>
+</head>
+<body>
+  <main id="video-root">
+    <!-- S0 Intro -->
+    <div class="scr" data-scene="0">
+      <div class="center">
+        <div class="bigicon"><img src="assets/coffre-512.png" alt="Coffre" /></div>
+        <h1 class="brand">Coffre</h1>
+        <p class="claim">L'appli qui te montre enfin où part ton argent.</p>
+      </div>
+    </div>
+
+    <!-- S1 Sécurité -->
+    <div class="scr" data-scene="1">
+      <div class="lockwrap">
+        <div class="lock-ico" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><rect x="20" y="44" width="60" height="42" rx="8" fill="none" stroke="#fff" stroke-width="7"/><path d="M32 44 V32 a18 18 0 0 1 36 0 V44" fill="none" stroke="#fff" stroke-width="7"/><circle cx="50" cy="63" r="6" fill="#fff"/></svg>
+        </div>
+        <h2 class="lock-h">Coffre</h2>
+        <p class="lock-s">Entre ton code</p>
+        <div class="dots" id="pinDots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="keys" id="keys">
+          <b class="k">1</b><b class="k">2</b><b class="k">3</b>
+          <b class="k">4</b><b class="k">5</b><b class="k">6</b>
+          <b class="k">7</b><b class="k">8</b><b class="k">9</b>
+          <b style="opacity:0"></b><b class="k">0</b><b style="opacity:0"></b>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2 Import + tri auto -->
+    <div class="scr" data-scene="2">
+      <div class="p-title">Opérations <span class="p-sub">rangées automatiquement</span></div>
+      <div class="row-tx glass"><div class="ico">🛒</div><div class="m"><div class="c">Courses <span class="tag-auto">auto</span></div><div class="n">CARREFOUR MARKET</div></div><div class="a exp">-54,20 €</div></div>
+      <div class="row-tx glass"><div class="ico">⛽</div><div class="m"><div class="c">Carburant <span class="tag-auto">auto</span></div><div class="n">TOTAL ENERGIES</div></div><div class="a exp">-71,00 €</div></div>
+      <div class="row-tx glass"><div class="ico">🎬</div><div class="m"><div class="c">Abonnements <span class="tag-auto">auto</span></div><div class="n">NETFLIX</div></div><div class="a exp">-13,49 €</div></div>
+      <div class="row-tx glass"><div class="ico">💶</div><div class="m"><div class="c">Salaire <span class="tag-auto">auto</span></div><div class="n">VIREMENT EMPLOYEUR</div></div><div class="a inc">+1 840,00 €</div></div>
+      <div class="row-tx glass"><div class="ico">🍽️</div><div class="m"><div class="c">Restaurants <span class="tag-auto">auto</span></div><div class="n">LE BISTROT</div></div><div class="a exp">-28,50 €</div></div>
+    </div>
+
+    <!-- S3 Accueil / reste à vivre -->
+    <div class="scr" data-scene="3">
+      <div class="p-title">Accueil</div>
+      <div class="hero">
+        <p class="l">Solde du mois</p>
+        <p class="amt">1 673,81 €</p>
+        <div class="row">
+          <div><p class="k">Revenus</p><p class="v">+1 840 €</p></div>
+          <div><p class="k">Dépenses</p><p class="v">-166,19 €</p></div>
+        </div>
+      </div>
+      <div class="safe glass"><div class="big">55,80 €</div><div class="lbl">reste à vivre<br>par jour</div></div>
+      <div class="ins glass"><div class="e">💡</div><div class="t">Ton plus gros poste ce mois-ci, ce sont les <b>courses</b>. Tu es 12 % en dessous du mois dernier.</div></div>
+    </div>
+
+    <!-- S4 Budgets / alertes -->
+    <div class="scr" data-scene="4">
+      <div class="p-title">Budgets <span class="p-sub">alertes avant de déraper</span></div>
+      <div class="glass" style="padding:14px">
+        <div class="bud"><div class="top"><b>🛒 Courses</b><span>210 / 300 €</span></div><div class="bar ok" data-w="70"><i></i></div></div>
+        <div class="bud"><div class="top"><b>🍽️ Restaurants</b><span>128 / 150 €</span></div><div class="bar warn" data-w="85"><i></i></div></div>
+        <div class="bud"><div class="top"><b>🎮 Loisirs</b><span>96 / 80 €</span></div><div class="bar over" data-w="100"><i></i></div></div>
+        <div class="bud"><div class="top"><b>⛽ Carburant</b><span>71 / 160 €</span></div><div class="bar ok" data-w="44"><i></i></div></div>
+      </div>
+      <div class="ins glass"><div class="e">⚠️</div><div class="t">Attention : ton budget <b>Loisirs</b> est dépassé de 16 €.</div></div>
+    </div>
+
+    <!-- S5 Abos / résiliation -->
+    <div class="scr" data-scene="5">
+      <div class="p-title">Liste noire <span class="p-sub">abonnements détectés</span></div>
+      <div class="abo glass"><div class="nm">🎬 Netflix <span class="badge">actif</span></div><div class="co">13,49 €/m</div></div>
+      <div class="abo glass"><div class="nm">🎵 Spotify <span class="badge">actif</span></div><div class="co">10,99 €/m</div></div>
+      <div class="abo glass"><div class="nm">💪 Salle de sport <span class="badge">actif</span></div><div class="co">29,90 €/m</div></div>
+      <div class="letter glass"><b>Lettre de résiliation prête ✍️</b><br>« Madame, Monsieur, je vous informe de ma décision de résilier mon abonnement… »</div>
+    </div>
+
+    <!-- S6 Outro / CTA -> ouvre l'appli -->
+    <div class="scr" data-scene="6">
+      <div class="center">
+        <div class="bigicon"><img src="assets/coffre-512.png" alt="Coffre" /></div>
+        <h1 class="brand"><span>Coffre</span></h1>
+        <p class="claim">Tes finances, en sécurité, dans ta poche.</p>
+        <a class="cta" href="https://coffre.generationapp.fr">Ouvrir Coffre →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="../player.js"></script>
+</body>
+</html>
