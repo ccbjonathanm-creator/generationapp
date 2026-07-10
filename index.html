@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050914" />
+  <meta name="description" content="Generation App : des applications mobiles simples, privées et hors-ligne. Budget, voyage, scanner IA et plus." />
+  <title>Generation App — mes applications</title>
+  <link rel="icon" href="favicon.svg" />
+  <style>
+    :root{
+      --bg:#050914; --txt:#e8ecff; --muted:#8a93b8;
+      --card:rgba(20,28,48,.55); --stroke:rgba(148,163,255,.16); --stroke2:rgba(148,163,255,.34);
+      --grad:linear-gradient(120deg,#5eead4,#818cf8 55%,#f472b6);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0}
+    body{
+      background:var(--bg); color:var(--txt); min-height:100vh;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    }
+    .aurora{
+      position:fixed; inset:-30% -20% auto -20%; height:70vh; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(40% 40% at 20% 20%,rgba(94,234,212,.20),transparent 70%),
+        radial-gradient(45% 45% at 80% 10%,rgba(129,140,248,.22),transparent 70%),
+        radial-gradient(40% 40% at 60% 60%,rgba(244,114,182,.16),transparent 70%);
+      filter:blur(30px);
+    }
+    .wrap{position:relative; z-index:1; max-width:760px; margin:0 auto; padding:56px 20px 60px}
+    header{text-align:center; margin-bottom:40px}
+    .logo{width:64px;height:64px;margin:0 auto 18px;display:block}
+    h1{margin:0 0 8px; font-size:30px; letter-spacing:.3px}
+    h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .tagline{margin:0; color:var(--muted); font-size:15px; line-height:1.5}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    @media (max-width:560px){ .grid{grid-template-columns:1fr} }
+    .card{
+      display:flex; flex-direction:column; gap:6px; padding:22px;
+      background:var(--card); border:1px solid var(--stroke); border-radius:22px;
+      backdrop-filter:blur(12px); text-decoration:none; color:inherit;
+      transition:transform .14s, border-color .2s, box-shadow .2s; position:relative;
+    }
+    .card:hover{transform:translateY(-3px); border-color:var(--stroke2); box-shadow:0 18px 40px -22px rgba(129,140,248,.8)}
+    .card .emoji{font-size:34px; margin-bottom:6px}
+    .card h2{margin:0; font-size:20px}
+    .card p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.5; flex:1}
+    .go{margin-top:12px; display:inline-flex; align-items:center; gap:7px; font-weight:600; font-size:14px;
+      padding:11px 16px; border-radius:14px; background:var(--grad); color:#071018; align-self:flex-start}
+    .card.soon{opacity:.72}
+    .badge{position:absolute; top:16px; right:16px; font-size:11px; font-weight:700;
+      padding:4px 10px; border-radius:10px; background:rgba(244,114,182,.16); color:#f472b6}
+    .soon .go{background:rgba(148,163,255,.14); color:var(--muted); cursor:default}
+    .hint{margin:34px auto 0; max-width:560px; text-align:center; color:var(--muted); font-size:13px; line-height:1.6;
+      background:var(--card); border:1px solid var(--stroke); border-radius:16px; padding:16px 18px; backdrop-filter:blur(12px)}
+    .hint b{color:var(--txt)}
+    footer{margin-top:40px; text-align:center; color:var(--muted); font-size:12px; opacity:.7}
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="wrap">
+    <header>
+      <svg class="logo" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#5eead4"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="4" y="4" width="24" height="24" rx="7" fill="none" stroke="url(#g)" stroke-width="2.4"/>
+        <path d="M11 16 h10 M16 11 v10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <h1>Generation <span>App</span></h1>
+      <p class="tagline">Des applications simples, privées et qui marchent hors-ligne.<br>Rien à installer depuis un store : ouvre, ajoute à ton écran d'accueil, c'est prêt.</p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="https://coffre.generationapp.fr">
+        <span class="emoji">💶</span>
+        <h2>Coffre</h2>
+        <p>Ton budget sous contrôle : dépenses, reste à vivre, alertes. 100% privé, chiffré, hors-ligne.</p>
+        <span class="go">Ouvrir →</span>
+      </a>
+
+      <a class="card" href="https://valise.generationapp.fr">
+        <span class="emoji">🧳</span>
+        <h2>Valise</h2>
+        <p>Ta liste de voyage à cocher, générée selon ta destination, la météo et tes dates.</p>
+        <span class="go">Ouvrir →</span>
+      </a>
+
+      <a class="card" href="https://portail.generationapp.fr">
+        <span class="emoji">🐰</span>
+        <h2>Portail</h2>
+        <p>Un lapin géant en réalité augmentée qui débarque dans ta pièce, via la caméra.</p>
+        <span class="go">Ouvrir →</span>
+      </a>
+
+      <div class="card soon">
+        <span class="badge">bientôt</span>
+        <span class="emoji">🔺</span>
+        <h2>Prisme</h2>
+        <p>Scanne un document : l'IA le lit, le résume, l'explique ou en extrait les infos clés.</p>
+        <span class="go">Bientôt</span>
+      </div>
+    </div>
+
+    <p class="hint">
+      <b>Comment installer une appli ?</b><br>
+      Ouvre-la, puis dans ton navigateur choisis <b>« Ajouter à l'écran d'accueil »</b>. Elle apparaît comme une vraie appli, utilisable même sans connexion.
+    </p>
+
+    <footer>generationapp.fr — © 2026</footer>
+  </div>
+</body>
+</html>
