@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Découvre Resolv : décris ton problème, l'IA te donne un diagnostic clair et les meilleures ressources pour t'en sortir." />
+  <title>Resolv — la vidéo</title>
+  <link rel="icon" href="assets/resolv.png" />
+  <link rel="stylesheet" href="../player.css?v=1" />
+  <style>
+    /* ---- identité bleue de Resolv (surcharge la palette du moteur) ---- */
+    :root{
+      --bg:#0b1220; --bg-soft:#0f1a2e;
+      --text:#eaf1ff; --muted:#9fb0cc;
+      --accent:#3d8bff; --accent-2:#31d0aa;
+      --green:#31d0aa; --red:#ff6b5b; --orange:#ffb23e;
+      --glow:0 0 24px rgba(61,139,255,.45);
+      --grad:linear-gradient(115deg,#3d8bff,#31d0aa);
+    }
+    body{
+      background:
+        radial-gradient(85% 55% at 10% -8%, rgba(61,139,255,.22), transparent 60%),
+        radial-gradient(75% 50% at 108% 110%, rgba(49,208,170,.16), transparent 55%),
+        var(--bg);
+    }
+    /* ---- écrans propres à RESOLV ---- */
+    .ask{padding:14px; margin-top:6px}
+    .ask .lbl{font-size:10px; color:var(--muted); margin-bottom:8px}
+    .inputbox{min-height:58px; border-radius:12px; background:rgba(255,255,255,.05); border:1px solid var(--line);
+      padding:11px 12px; font-size:12px; line-height:1.5; color:var(--text)}
+    .inputbox .cur{display:inline-block; width:1px; background:var(--accent); margin-left:1px;
+      animation:blink 1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}
+    .solvebtn{margin-top:11px; text-align:center; font-size:12px; font-weight:800; padding:11px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#04121f}
+    .diag{padding:13px; margin-top:6px}
+    .diag .dh{font-size:11px; font-weight:800; display:flex; align-items:center; gap:7px; margin-bottom:10px}
+    .cause{font-size:10.5px; line-height:1.5; padding:10px; border-radius:10px; margin-bottom:10px;
+      background:rgba(255,178,62,.12); border:1px solid rgba(255,178,62,.35); color:#ffd591}
+    .cause b{color:#fff}
+    .dstep{display:flex; gap:9px; font-size:10.5px; line-height:1.45; margin-top:9px; transform:translateY(6px)}
+    .dstep .n{flex:none; width:18px; height:18px; border-radius:6px; display:grid; place-items:center; font-size:10px;
+      font-weight:900; color:#04121f; background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    .res{display:flex; align-items:center; gap:10px; padding:10px; margin-top:9px}
+    .res .thumb{flex:none; width:52px; height:38px; border-radius:8px; position:relative; overflow:hidden;
+      background:linear-gradient(135deg,#1b2a45,#24406b); display:grid; place-items:center}
+    .res .thumb.forum{background:linear-gradient(135deg,#123b34,#1d5f52)}
+    .res .thumb svg{width:16px; height:16px; fill:#fff; opacity:.95}
+    .res .rm{flex:1; min-width:0}
+    .res .rt{font-size:10.5px; font-weight:700; line-height:1.3}
+    .res .rs{font-size:8.5px; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:5px}
+    .res .go{font-size:15px; color:var(--accent)}
+    .tag{font-size:7.5px; font-weight:800; padding:1px 6px; border-radius:7px}
+    .tag.yt{background:rgba(255,107,91,.18); color:#ff8f83}
+    .tag.fo{background:rgba(49,208,170,.18); color:#5fe0c4}
+    .domains{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:8px}
+    .dom{padding:12px 6px; border-radius:12px; text-align:center; background:var(--card); border:1px solid var(--line)}
+    .dom .e{font-size:22px} .dom .n{font-size:9px; color:var(--muted); margin-top:4px}
+    .access{padding:14px; margin-top:6px; text-align:center}
+    .access .free{font-size:13px; font-weight:800; color:var(--accent-2)}
+    .access .arrow{font-size:18px; color:var(--muted); margin:8px 0}
+    .access .life{font-size:13px; font-weight:800}
+    .access .price{display:inline-block; margin-top:10px; font-size:12px; font-weight:800; padding:8px 16px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#04121f}
+    .access .small{font-size:9px; color:var(--muted); margin-top:10px; line-height:1.4}
+  </style>
+</head>
+<body>
+  <main id="video-root">
+    <!-- S0 Intro -->
+    <div class="scr" data-scene="0">
+      <div class="center">
+        <div class="bigicon"><img src="assets/resolv-512.png" alt="Resolv" /></div>
+        <h1 class="brand">Resolv</h1>
+        <p class="claim">Un souci ? On le règle.</p>
+      </div>
+    </div>
+
+    <!-- S1 Décris ton problème -->
+    <div class="scr" data-scene="1">
+      <div class="p-title">Ton problème <span class="p-sub">avec tes mots</span></div>
+      <div class="ask glass">
+        <div class="lbl">Décris ce qui ne va pas</div>
+        <div class="inputbox"><span id="typed"></span><span class="cur">&nbsp;</span></div>
+        <div class="solvebtn">🔍 Trouver la solution</div>
+      </div>
+    </div>
+
+    <!-- S2 Diagnostic IA -->
+    <div class="scr" data-scene="2">
+      <div class="p-title">Diagnostic <span class="p-sub">clair, étape par étape</span></div>
+      <div class="diag glass">
+        <div class="dh">🧠 Cause la plus probable</div>
+        <div class="cause">Bougie encrassée ou <b>essence trop vieille</b>. Fréquent après l'hivernage.</div>
+        <div class="dstep"><span class="n">1</span><div>Vide le vieux carburant et remets de l'essence fraîche.</div></div>
+        <div class="dstep"><span class="n">2</span><div>Démonte et nettoie la bougie, vérifie l'écartement.</div></div>
+        <div class="dstep"><span class="n">3</span><div>Nettoie le filtre à air, puis retente le démarrage.</div></div>
+      </div>
+    </div>
+
+    <!-- S3 Liens pré-remplis -->
+    <div class="scr" data-scene="3">
+      <div class="p-title">Ressources <span class="p-sub">déjà prêtes à ouvrir</span></div>
+      <div class="res glass">
+        <span class="thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <div class="rm"><div class="rt">Tondeuse qui ne démarre pas : les 3 causes</div><div class="rs"><span class="tag yt">VIDÉO</span> YouTube</div></div>
+        <span class="go">→</span>
+      </div>
+      <div class="res glass">
+        <span class="thumb forum"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg></span>
+        <div class="rm"><div class="rt">« Moteur thermique noyé au démarrage »</div><div class="rs"><span class="tag fo">FORUM</span> forum-bricolage</div></div>
+        <span class="go">→</span>
+      </div>
+      <div class="res glass">
+        <span class="thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <div class="rm"><div class="rt">Nettoyer une bougie en 2 minutes</div><div class="rs"><span class="tag yt">VIDÉO</span> YouTube</div></div>
+        <span class="go">→</span>
+      </div>
+    </div>
+
+    <!-- S4 Tous les domaines -->
+    <div class="scr" data-scene="4">
+      <div class="p-title">Tous les domaines</div>
+      <div class="domains">
+        <div class="dom glass"><div class="e">🚗</div><div class="n">Voiture</div></div>
+        <div class="dom glass"><div class="e">🚲</div><div class="n">Vélo</div></div>
+        <div class="dom glass"><div class="e">💻</div><div class="n">Ordi</div></div>
+        <div class="dom glass"><div class="e">🌿</div><div class="n">Jardin</div></div>
+        <div class="dom glass"><div class="e">🔧</div><div class="n">Bricolage</div></div>
+        <div class="dom glass"><div class="e">🏠</div><div class="n">Maison</div></div>
+        <div class="dom glass"><div class="e">📱</div><div class="n">Téléphone</div></div>
+        <div class="dom glass"><div class="e">🔌</div><div class="n">Électro</div></div>
+        <div class="dom glass"><div class="e">＋</div><div class="n">et plus</div></div>
+      </div>
+    </div>
+
+    <!-- S5 Accès -->
+    <div class="scr" data-scene="5">
+      <div class="p-title">Accès</div>
+      <div class="access glass">
+        <div class="free">2 diagnostics offerts</div>
+        <div class="arrow">↓</div>
+        <div class="life">Puis débloqué à vie</div>
+        <div class="price">Licence 15 €</div>
+        <div class="small">Clé liée à ton e-mail : récupérable même après réinstallation.</div>
+      </div>
+    </div>
+
+    <!-- S6 Outro / CTA -->
+    <div class="scr" data-scene="6">
+      <div class="center">
+        <div class="bigicon"><img src="assets/resolv-512.png" alt="Resolv" /></div>
+        <h1 class="brand"><span>Resolv</span></h1>
+        <p class="claim">Trouve la solution, à chaque fois.</p>
+        <a class="cta" href="https://resolv.generationapp.fr">Ouvrir Resolv →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="../player.js"></script>
+</body>
+</html>
