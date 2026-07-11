@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#05060e" />
+  <meta name="description" content="Découvre Cortex : ton second cerveau chiffré. Notes, liens, recettes, idées, et une IA qui parle à tes notes." />
+  <title>Cortex — la vidéo</title>
+  <link rel="icon" href="assets/cortex.png" />
+  <link rel="stylesheet" href="../player.css?v=1" />
+  <style>
+    /* Cortex : violet + cyan */
+    #video-root{ --accent:#8b6cff; --accent-2:#25e6d5;
+      --glow:0 0 24px rgba(37,230,213,.45); }
+
+    /* ---- cartes de notes (S1) ---- */
+    .ct-card{padding:11px 13px; margin-top:9px; text-align:left}
+    .ct-card .ct-t{font-size:12px; font-weight:700; margin:0}
+    .ct-card .ct-b{font-size:9.5px; color:var(--muted); margin:4px 0 0; line-height:1.4}
+    .ct-card .ct-link{font-size:9.5px; color:var(--accent-2); margin:4px 0 0; word-break:break-all}
+    .ct-tags{display:flex; gap:5px; margin-top:7px; flex-wrap:wrap}
+    .ct-tag{font-size:8px; padding:2px 7px; border-radius:20px; color:var(--accent-2);
+      background:color-mix(in srgb,var(--accent-2) 16%,transparent); border:1px solid color-mix(in srgb,var(--accent-2) 30%,transparent)}
+    .ct-pin{float:right; font-size:11px}
+
+    /* ---- import (S2) ---- */
+    .ct-imp{padding:14px; margin-top:8px; text-align:center}
+    .ct-impico{font-size:34px}
+    .ct-impzip{display:inline-flex; align-items:center; gap:7px; margin-top:8px; padding:8px 13px; border-radius:11px;
+      background:var(--card-2); border:1px solid var(--line); font-size:10px; font-weight:700}
+    .ct-impres{margin-top:12px; padding:10px; border-radius:12px; font-size:11px; font-weight:700;
+      background:color-mix(in srgb,var(--accent-2) 12%,transparent); border:1px solid color-mix(in srgb,var(--accent-2) 34%,transparent); color:var(--accent-2)}
+    .ct-impbtn{margin-top:10px; display:inline-block; padding:9px 20px; border-radius:12px; font-size:11px; font-weight:800; color:#06121a;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+
+    /* ---- chat (S3) ---- */
+    .ct-msg{max-width:82%; padding:9px 12px; border-radius:15px; font-size:10.5px; line-height:1.45; margin-top:10px}
+    .ct-me{margin-left:auto; color:#06121a; border-bottom-right-radius:5px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); font-weight:600}
+    .ct-ia{background:var(--card); border:1px solid var(--line); border-bottom-left-radius:5px}
+    .ct-src{margin-top:8px; display:flex; gap:6px}
+    .ct-srcchip{font-size:8.5px; padding:3px 9px; border-radius:20px; color:var(--accent-2);
+      background:var(--card-2); border:1px solid color-mix(in srgb,var(--accent-2) 30%,transparent)}
+
+    /* ---- dictée + note IA (S4) ---- */
+    .ct-mic{width:66px; height:66px; border-radius:50%; margin:6px auto 4px; display:grid; place-items:center; font-size:26px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:0 0 0 0 rgba(37,230,213,.5); animation:ctpulse 1.4s infinite}
+    @keyframes ctpulse{0%{box-shadow:0 0 0 0 rgba(37,230,213,.5)}70%{box-shadow:0 0 0 16px rgba(37,230,213,0)}100%{box-shadow:0 0 0 0 rgba(37,230,213,0)}}
+    .ct-said{font-size:9.5px; color:var(--muted); font-style:italic; text-align:center; margin:2px 0 10px}
+    .ct-gen{padding:12px 13px; text-align:left}
+    .ct-gen .ct-gt{font-size:12px; font-weight:800; margin:0 0 6px}
+    .ct-gline{font-size:10.5px; color:var(--text); padding:4px 0; border-bottom:1px solid var(--line)}
+    .ct-gline b{color:var(--accent-2)}
+
+    /* ---- listes à cocher (S5) ---- */
+    .ct-list{padding:13px; margin-top:8px; text-align:left}
+    .ct-row{display:flex; align-items:center; gap:11px; padding:7px 2px}
+    .ct-chk{width:21px; height:21px; border-radius:6px; border:2px solid var(--muted); flex:none; position:relative; transition:.2s}
+    .ct-chk.on{background:linear-gradient(135deg,var(--accent),var(--accent-2)); border-color:transparent}
+    .ct-chk.on::after{content:"✓"; position:absolute; inset:0; display:grid; place-items:center; color:#06121a; font-size:13px; font-weight:900}
+    .ct-txt{font-size:11.5px}
+    .ct-chk.on + .ct-txt{text-decoration:line-through; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main id="video-root">
+    <!-- S0 Intro -->
+    <div class="scr" data-scene="0">
+      <div class="center">
+        <div class="bigicon"><img src="assets/cortex-512.png" alt="Cortex" /></div>
+        <h1 class="brand">Cortex</h1>
+        <p class="claim">Ton second cerveau. Privé, dans ta poche.</p>
+      </div>
+    </div>
+
+    <!-- S1 Notes -->
+    <div class="scr" data-scene="1">
+      <div class="p-title">Tes notes <span class="p-sub">tout au même endroit</span></div>
+      <div class="ct-card glass"><span class="ct-pin">📌</span><p class="ct-t">Idées projet appli</p><p class="ct-b">Scanner de tickets pour ranger les garanties…</p><div class="ct-tags"><span class="ct-tag">#idée</span><span class="ct-tag">#projet</span></div></div>
+      <div class="ct-card glass"><p class="ct-t">Doc à lire</p><p class="ct-link">https://docs…/guide-complet</p><div class="ct-tags"><span class="ct-tag">#lien</span><span class="ct-tag">#à-lire</span></div></div>
+      <div class="ct-card glass"><p class="ct-t">Recette crêpes de mamie</p><p class="ct-b">300g farine, 4 œufs, 60cl lait, 1h de repos…</p><div class="ct-tags"><span class="ct-tag">#recette</span></div></div>
+      <div class="ct-card glass"><p class="ct-t">Code wifi maison</p><p class="ct-b">Livebox-3F2A — chiffré 🔒</p><div class="ct-tags"><span class="ct-tag">#maison</span></div></div>
+    </div>
+
+    <!-- S2 Import -->
+    <div class="scr" data-scene="2">
+      <div class="p-title">Importer mes notes <span class="p-sub">sans tout retaper</span></div>
+      <div class="ct-imp glass">
+        <div class="ct-impico">🟡</div>
+        <div style="font-size:11px; font-weight:700; margin-top:6px">Google Keep</div>
+        <div class="ct-impzip">🗜️ takeout-keep.zip</div>
+        <div class="ct-impres">✓ 10 notes prêtes à importer</div>
+        <div class="ct-impbtn">Importer</div>
+      </div>
+      <p class="claim" style="margin:12px auto 0; text-align:center">Keep, texte, Notion, Evernote… tes libellés deviennent des tags.</p>
+    </div>
+
+    <!-- S3 Chat "parle à tes notes" -->
+    <div class="scr" data-scene="3">
+      <div class="p-title">Parle à tes notes 💬</div>
+      <div class="ct-msg ct-me">Quelle est la réf de mon filtre à eau ?</div>
+      <div class="ct-msg ct-ia">La référence est <b>1051120</b> (BRITA Maxtra Pro), d'après ta note « Filtre à eau cuisine ».
+        <div class="ct-src"><span class="ct-srcchip">📄 Filtre à eau cuisine</span></div>
+      </div>
+    </div>
+
+    <!-- S4 Dictée + note créée par l'IA -->
+    <div class="scr" data-scene="4">
+      <div class="p-title">Une note à la voix <span class="p-sub">créée par l'IA</span></div>
+      <div class="ct-mic">🎤</div>
+      <p class="ct-said">« une note avec le fournisseur Livebox et mon code wifi »</p>
+      <div class="ct-gen glass">
+        <p class="ct-gt">Code Wifi maison</p>
+        <div class="ct-gline"><b>Fournisseur :</b> Livebox</div>
+        <div class="ct-gline"><b>Nom du réseau :</b> </div>
+        <div class="ct-gline" style="border:none"><b>Code wifi :</b> </div>
+      </div>
+    </div>
+
+    <!-- S5 Listes à cocher -->
+    <div class="scr" data-scene="5">
+      <div class="p-title">Listes à cocher <span class="p-sub">courses, tâches…</span></div>
+      <div class="ct-list glass">
+        <div class="ct-row"><div class="ct-chk"></div><div class="ct-txt">Lait demi-écrémé</div></div>
+        <div class="ct-row"><div class="ct-chk"></div><div class="ct-txt">Café en grains</div></div>
+        <div class="ct-row"><div class="ct-chk"></div><div class="ct-txt">Pâtes complètes</div></div>
+        <div class="ct-row"><div class="ct-chk"></div><div class="ct-txt">Sac poubelle 30L</div></div>
+      </div>
+    </div>
+
+    <!-- S6 Outro / CTA -->
+    <div class="scr" data-scene="6">
+      <div class="center">
+        <div class="bigicon"><img src="assets/cortex-512.png" alt="Cortex" /></div>
+        <h1 class="brand"><span>Cortex</span></h1>
+        <p class="claim">Ton second cerveau, dans ta poche.</p>
+        <a class="cta" href="https://cortex.generationapp.fr">Ouvrir Cortex →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="../player.js"></script>
+</body>
+</html>
