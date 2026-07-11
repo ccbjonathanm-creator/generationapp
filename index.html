@@ -118,6 +118,14 @@
       transition:transform .15s, box-shadow .25s}
     .vidbadge svg{width:11px; height:11px; fill:#fff}
     .vidbadge:hover{transform:scale(1.07); box-shadow:0 12px 26px -6px rgba(139,123,255,1)}
+    /* ---------- badge « Guide PDF » (bas droite de chaque carte) ---------- */
+    .guidebadge{position:absolute; bottom:16px; right:16px; z-index:4; display:inline-flex; align-items:center; gap:6px;
+      font-size:11.5px; font-weight:800; padding:7px 12px; border-radius:999px; text-decoration:none; color:#e7ecff;
+      background:rgba(10,14,30,.78); border:1px solid rgba(150,165,255,.32); backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px); box-shadow:0 8px 20px -8px rgba(0,0,0,.75);
+      transition:transform .15s, border-color .25s}
+    .guidebadge svg{width:13px; height:13px; fill:#9fb4ff}
+    .guidebadge:hover{transform:scale(1.06); border-color:rgba(150,165,255,.65)}
     .cardwrap:nth-child(1){animation-delay:.05s}
 
     /* ---------- guide d'installation ---------- */
@@ -174,28 +182,46 @@
         <a class="vidbadge" href="video/coffre/index.html" aria-label="Voir la vidéo de Coffre">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Vidéo
         </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Coffre.pdf" target="_blank" rel="noopener" aria-label="Guide PDF de Coffre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
+        </a>
       </div>
 
-      <a class="card" style="--a:#10b981" href="https://valise.generationapp.fr">
-        <span class="chip"><img src="icons/valise.png" alt="Icône Valise" width="64" height="64" /></span>
-        <h2>Valise</h2>
-        <p>Ne fais plus jamais ta valise dans le stress. Dis où et quand tu pars, elle bâtit ta liste à cocher selon la météo prévue, le nombre de voyageurs et le type de séjour.</p>
-        <span class="go">Ouvrir →</span>
-      </a>
+      <div class="cardwrap" style="--a:#10b981">
+        <a class="card" style="--a:#10b981" href="https://valise.generationapp.fr">
+          <span class="chip"><img src="icons/valise.png" alt="Icône Valise" width="64" height="64" /></span>
+          <h2>Valise</h2>
+          <p>Ne fais plus jamais ta valise dans le stress. Dis où et quand tu pars, elle bâtit ta liste à cocher selon la météo prévue, le nombre de voyageurs et le type de séjour.</p>
+          <span class="go">Ouvrir →</span>
+        </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Valise.pdf" target="_blank" rel="noopener" aria-label="Guide PDF de Valise">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
+        </a>
+      </div>
 
-      <a class="card" style="--a:#818cf8" href="https://voyage.generationapp.fr">
-        <span class="chip"><img src="icons/voyage.png" alt="Icône Voyage" width="64" height="64" /></span>
-        <h2>Voyage</h2>
-        <p>Ton programme de voyage prêt en un instant. Des lieux réels vérifiés jour par jour, la météo sur place, et les liens vols et hôtels déjà pré-remplis pour réserver.</p>
-        <span class="go">Ouvrir →</span>
-      </a>
+      <div class="cardwrap" style="--a:#818cf8">
+        <a class="card" style="--a:#818cf8" href="https://voyage.generationapp.fr">
+          <span class="chip"><img src="icons/voyage.png" alt="Icône Voyage" width="64" height="64" /></span>
+          <h2>Voyage</h2>
+          <p>Ton programme de voyage prêt en un instant. Des lieux réels vérifiés jour par jour, la météo sur place, et les liens vols et hôtels déjà pré-remplis pour réserver.</p>
+          <span class="go">Ouvrir →</span>
+        </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Voyage.pdf" target="_blank" rel="noopener" aria-label="Guide PDF de Voyage">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
+        </a>
+      </div>
 
-      <a class="card" style="--a:#22d3ee" href="https://portail.generationapp.fr">
-        <span class="chip"><img src="icons/portail.png" alt="Icône Portail" width="64" height="64" /></span>
-        <h2>Portail</h2>
-        <p>Fais surgir un lapin géant dans ton salon. Vraie réalité augmentée par la caméra : il rôde, te fixe et te charge dessus. L'effet qui bluffe tous ceux à qui tu le montres.</p>
-        <span class="go">Ouvrir →</span>
-      </a>
+      <div class="cardwrap" style="--a:#22d3ee">
+        <a class="card" style="--a:#22d3ee" href="https://portail.generationapp.fr">
+          <span class="chip"><img src="icons/portail.png" alt="Icône Portail" width="64" height="64" /></span>
+          <h2>Portail</h2>
+          <p>Fais surgir un lapin géant dans ton salon. Vraie réalité augmentée par la caméra : il rôde, te fixe et te charge dessus. L'effet qui bluffe tous ceux à qui tu le montres.</p>
+          <span class="go">Ouvrir →</span>
+        </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Portail.pdf" target="_blank" rel="noopener" aria-label="Guide PDF de Portail">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
+        </a>
+      </div>
 
       <div class="cardwrap" style="--a:#f59e0b">
         <a class="card" style="--a:#f59e0b" href="https://offgrid.generationapp.fr">
@@ -206,6 +232,9 @@
         </a>
         <a class="vidbadge" href="video/offgrid/index.html" aria-label="Voir la vidéo d'Off-Grid">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Vidéo
+        </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Off-Grid.pdf" target="_blank" rel="noopener" aria-label="Guide PDF d'Off-Grid">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
         </a>
       </div>
 
@@ -218,6 +247,9 @@
         </a>
         <a class="vidbadge" href="video/resolv/index.html" aria-label="Voir la vidéo de Resolv">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Vidéo
+        </a>
+        <a class="guidebadge" href="tutoriels/Tuto-Resolv.pdf" target="_blank" rel="noopener" aria-label="Guide PDF de Resolv">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2 4 4h-4V4z"/></svg>Guide
         </a>
       </div>
 
@@ -240,6 +272,7 @@
         <li><span class="num">4</span><span>Appuie sur <b>« Installer »</b> pour confirmer.</span></li>
       </ol>
       <p class="note">L'icône apparaît sur ton écran d'accueil comme une vraie appli, et <b>elle marche même sans connexion</b>.</p>
+      <p class="note">Besoin d'un mode d'emploi détaillé ? Clique le badge <b>« Guide »</b> sur la carte d'une appli pour ouvrir son tutoriel PDF (installation, utilisation, et pour Voyage et Resolv, la clé IA gratuite).</p>
     </div>
 
     <footer>generationapp.fr — © 2026</footer>
